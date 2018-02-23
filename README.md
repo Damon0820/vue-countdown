@@ -5,7 +5,7 @@ a cool &amp;&amp; nice  countdown timer component (canvas used) for vue2.x
 
 ## show result 效果展示
 
-![Damon风](https://github.com/Damon0820/vue-marquee-roll-up/blob/master/static/img/show1.gif "Damon风")
+![Damon风](https://github.com/Damon0820/vue-countdown/blob/master/static/img/show1.gif "Damon风")
 </br>[Damon风的blog地址](https://www.cnblogs.com/damonFeng/)
 
 ## Installation
@@ -109,4 +109,3 @@ export default {
 
 ### Describe 说明 
   welcome your issue  and commit
-  
