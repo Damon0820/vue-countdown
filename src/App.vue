@@ -27,19 +27,19 @@ export default {
   data () {
     return {
       fire: 0,
-      time: 16,
+      time: 20,
       width: 200,
       height: 200,
       tiping: {
-        text: '倒计时啊',
+        text: '倒计时',
         color: '#fff'
       },
       tipend: {
-        text: '结束了',
+        text: 'END',
         color: '#fff'
       },
       bgCir: 'rgba(0, 0, 0, .6)',
-      statusChange: [14000, 4000]
+      statusChange: [12000, 5000]
     }
   },
   methods: {

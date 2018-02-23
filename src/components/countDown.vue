@@ -21,7 +21,7 @@
   // 扇形大小
   const degFan = Math.PI / 4
   // 扇形的速度增量step
-  const degFanStep = [0.1, 0.15]
+  const degFanStep = [0.1, 0.18]
   // 初始颜色
   const color = ['rgba(0, 255, 0, .6)', 'rgba(0, 100, 0, .6)']
 
