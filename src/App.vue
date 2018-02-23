@@ -9,12 +9,14 @@
         :tiping="tiping"
         :tipend="tipend"
         :bgCir="bgCir"
+        :statusChange="statusChange"
         @onEnd="onEnd"/>
      </div>
   </div>
 </template>
 
 <script>
+
 import countDown from './components/countDown'
 
 export default {
@@ -36,13 +38,15 @@ export default {
         text: '结束了',
         color: '#fff'
       },
-      bgCir: 'rgba(0, 0, 0, .6)'
+      bgCir: 'rgba(0, 0, 0, .6)',
+      statusChange: [14000, 4000]
     }
   },
   methods: {
+    // 重新开启新的倒计时
     fireCD () {
       // 自定义参数设置
-      this.time = 33
+      this.time = 11
       this.width = 300
       this.height = 300
       this.tiping = 'gogogo'

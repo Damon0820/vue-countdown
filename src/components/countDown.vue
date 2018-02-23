@@ -55,17 +55,28 @@
   export default {
     props: {
       // 开始倒计时
-      fire: validatorNumber(0),
+      fire: Object.assign({require: true}, validatorNumber(0)),
       width: validatorNumber(200),
       height: validatorNumber(200),
       // 倒计时的总时间 (s)
-      time: validatorNumber(10),
+      time: validatorNumber(15),
+      // 倒计时的状态改变(绿 => 黄 => 红)
+      statusChange: {
+        type: Array,
+        default () {
+          return [10000, 5000]
+        },
+        validator (val) {
+          return val.length === 2
+        }
+      },
       // 倒计时进行时的文本
       tiping: validatorFontStyle('倒计时', '#fff'),
       // 倒计时结束时的文本
       tipend: validatorFontStyle('END', '#fff'),
       // 倒计时圆盘背景颜色
       bgCir: {
+        type: String,
         default: 'rgba(0, 0, 0, .6)'
       }
     },
@@ -146,17 +157,17 @@
       },
       colorChange () {
         switch (true) {
-          case this.timeLeft >= 10000 :
+          case this.timeLeft >= this.statusChange[0] :
             this.color[0] = 'rgba(0, 255, 0, .6)'
             this.color[1] = 'rgba(0, 100, 0, .6)'
             break
-          case this.timeLeft >= 5000 :
+          case this.timeLeft >= this.statusChange[1] :
             this.color[0] = 'rgba(255, 255, 0, .6)'
             this.color[1] = 'rgba(100, 100, 0, .6)'
             // 运动扇形的速度增量
             this.speedFan += degFanStep[0] * fps / 60
             break
-          case this.timeLeft <= 5000 :
+          case this.timeLeft <= this.statusChange[1] :
             this.color[0] = 'rgba(255, 0, 0, .6)'
             this.color[1] = 'rgba(100, 0, 0, .6)'
             // 运动扇形的速度增量            
@@ -192,7 +203,7 @@
           this.drawFan(this.degCs)
 
           // 快速运动的扇形
-          if (this.timeLeft < 10000) {
+          if (this.timeLeft < this.statusChange[0]) {
             // 速度不断加快
             let sDeg = this.speedFan
             this.drawFan(sDeg)
