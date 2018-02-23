@@ -1,56 +1,119 @@
 <!--
-     Describe: 倒计时countDown
+     Describe: canvas实现类似时钟的倒计时效果
  -->
 <template>
   <!--公告-->
   <section class="ctD-wrap">
-    <canvas id="cD" width="200" height="200">浏览器不支持Canvas,请升级或改用其它浏览器！</canvas>
+    <canvas class="ctD" ref="ctD" :style="styles" width="200" height="200">浏览器不支持Canvas,请升级或改用其它浏览器！</canvas>
   </section>
 </template>
 
 <script>
 
+  // fps：1s的帧数
+  const fps = 60
+  // 背景圆半径r。这里100为cavans  width的一半
+  const r = 100
+  // 圆环半径90
+  const rB = 90
+  // 圆环粗细程度
+  const lineWidth = 8
+  // 扇形大小
+  const degFan = Math.PI / 4
+  // 扇形的速度增量step
+  const degFanStep = [0.1, 0.15]
+  // 初始颜色
+  const color = ['rgba(0, 255, 0, .6)', 'rgba(0, 100, 0, .6)']
+
+  const regNumber = /^\d+$/
+
+  // 验证数字类型
+  function validatorNumber (defautVal) {
+    return {
+        validator (val) {
+          return regNumber.test(val)
+        },
+        default: defautVal
+      }
+  }
+
+  // 验证fontStyle
+  function validatorFontStyle (...arg) {
+    return {
+        default () {
+          return {
+            text: arg[0],
+            color: arg[1]
+          }
+        },
+        validator (val) {
+          return val.text && val.color
+        }
+      }
+  }
+
   export default {
+    props: {
+      // 开始倒计时
+      fire: validatorNumber(0),
+      width: validatorNumber(200),
+      height: validatorNumber(200),
+      // 倒计时的总时间 (s)
+      time: validatorNumber(10),
+      // 倒计时进行时的文本
+      tiping: validatorFontStyle('倒计时', '#fff'),
+      // 倒计时结束时的文本
+      tipend: validatorFontStyle('END', '#fff'),
+      // 倒计时圆盘背景颜色
+      bgCir: {
+        default: 'rgba(0, 0, 0, .6)'
+      }
+    },
     data () {
       return {
         ctx: null,
         timer: null,
-        sec: 15,      // 倒计时的时间
-        ms: 10,
-        r: 100,        // 背景圆半径r。这里100为cavans宽的一半
-        rB: 90,        // 圆环半径90
-        lineWidth: 8,  // 圆环粗细程度
-        degFan: Math.PI / 4,  // 扇形大小
-        color: ['rgba(0, 255, 0, .6)', 'rgba(0, 100, 0, .6)'],      // 颜色
-        speedFan: 12,   // 运动扇形的速度
-        cdText: '请下注',   // 倒计时的文本
-        cdEndCb: null     // 倒计时结束的回调
+        timeLeft: 0, // 倒计时正在进行的剩余时间
+        speedFan: 0,   // 运动扇形的速度
+        r,        
+        rB,        
+        lineWidth,  
+        degFan,
+        color,
+        degFanStep
       }
     },
     computed: {
+      // 宽高
+      styles () {
+        return {
+          width: this.width + 'px',
+          height: this.height + 'px'
+        }
+      },
       // 在坐标系的度数：逆时针旋转90度
       degCs () {
         // 走了一圈的百分之多少
-        let pro = (1 - this.ms / (this.sec * 1000))
+        let pro = (1 - this.timeLeft / (this.time * 1000))
         // 走的度数
         let deg = pro * Math.PI * 2
         return deg - Math.PI / 2
-      }
+      },
     },
     methods: {
-      drawText (text, fontSize, x, y) {
+      drawText (fontStyle, fontSize, x, y) {
         // 文字
-        this.ctx.fillStyle = '#fff'
+        this.ctx.fillStyle = fontStyle.color
         this.ctx.font = `normal ${fontSize}px ''`
         this.ctx.textAlign = 'center'
         this.ctx.textBaseline = 'middle'
-        this.ctx.fillText(text, x, y)
+        this.ctx.fillText(fontStyle.text, x, y)
       },
       drawCirBg () {
         // 圆形背景
         this.ctx.beginPath()
         this.ctx.arc(0, 0, this.r, 0, Math.PI * 2, false)
-        this.ctx.fillStyle = 'rgba(0, 0, 0, .6)'
+        this.ctx.fillStyle = this.bgCir
         this.ctx.fill()
       },
       drawCirBd () {
@@ -61,7 +124,7 @@
         this.ctx.stroke()
       },
       drawFan (deg) {
-        // 画扇形：
+        // 画扇形：(重点，难点部分)
         // 1、半径 this.rB - this.lineWidth / 2；
         // 2、角度大小：this.degFan；
         // 3、位置：deg；
@@ -83,19 +146,21 @@
       },
       colorChange () {
         switch (true) {
-          case this.ms >= 10000 :
+          case this.timeLeft >= 10000 :
             this.color[0] = 'rgba(0, 255, 0, .6)'
             this.color[1] = 'rgba(0, 100, 0, .6)'
             break
-          case this.ms >= 5000 :
+          case this.timeLeft >= 5000 :
             this.color[0] = 'rgba(255, 255, 0, .6)'
             this.color[1] = 'rgba(100, 100, 0, .6)'
-            this.speedFan += 0.01
+            // 运动扇形的速度增量
+            this.speedFan += degFanStep[0] * fps / 60
             break
-          case this.ms <= 5000 :
+          case this.timeLeft <= 5000 :
             this.color[0] = 'rgba(255, 0, 0, .6)'
             this.color[1] = 'rgba(100, 0, 0, .6)'
-            this.speedFan += 0.02
+            // 运动扇形的速度增量            
+            this.speedFan += degFanStep[1] * fps / 60
             break
         }
       },
@@ -107,27 +172,18 @@
         this.ctx.clearRect((-1) * this.r, (-1) * this.r, 2 * this.r, 2 * this.r)
       },
       reset () {
-        this.speedFan = 12
+        this.timeLeft = 1000 * this.time
       },
       // canvas绘图
       drawCd () {
-        let self = this
-//        this.clearCavans()
-        // 原点移动
-
         this.drawCirBg()
 
-//        console.log(this.sec * 1000, this.ms)
-        if (this.ms <= 0) {
-          // 转了一圈后
-//          this.drawText('停止下注', 40, 0, 0)
-          this.clearCavans()
-          if (typeof this.cdEndCb === 'function') {
-            this.cdEndCb()
-          }
-          this.clearTimer()
+        if (this.timeLeft <= 0) {
+          // 倒计时结束,转了一圈后
+          this.staticTip()
+          this.$emit('onEnd')
         } else {
-          // 一圈之内
+          // 倒计时正在进行,转了一圈之内
           this.ctx.lineWidth = this.lineWidth
           this.colorChange()
 
@@ -136,18 +192,19 @@
           this.drawFan(this.degCs)
 
           // 快速运动的扇形
-          if (this.ms < 10000) {
+          if (this.timeLeft < 10000) {
             // 速度不断加快
-//            this.speedFan += 0.015
-//            console.log(this.speedFan)
-            let sDeg = this.degCs * this.speedFan
+            let sDeg = this.speedFan
             this.drawFan(sDeg)
           }
 
           // 文字
-          let time = Math.ceil(this.ms / 1000)
-          this.drawText(time, 80, 0, -30)
-          this.drawText(this.cdText, 30, 0, 30)
+          let time = Math.ceil(this.timeLeft / 1000)
+          this.drawText({
+            text: time,
+            color: this.tiping.color
+          }, 80, 0, -30)
+          this.drawText(this.tiping, 30, 0, 30)
         }
       },
       // 启动定时器，开始倒计时
@@ -156,65 +213,41 @@
         this.reset()
         this.clearCavans()
         this.clearTimer()
-        // fps：1s的帧数
-        let fps = 30
         let sepTime = 1000 / fps
         this.timer = setInterval(() => {
           this.drawCd()
-          this.ms -= sepTime
-//          console.log(this.ms)
+          this.timeLeft -= sepTime
         }, sepTime)
       },
-      // 下注倒计时
-      cdBet (cb) {
-        this.cdText = '请下注'
-        this.cdEndCb = cb
-        this.startCd()
-      },
-      // 咪牌倒计时
-      cdMi (cb) {
-        this.cdText = '咪牌'
-        this.cdEndCb = cb
-        this.startCd()
-      },
-      // 开牌中
-      stageTip (msg) {
+      // 倒计时结束状态展示
+      staticTip () {
         this.clearTimer()
         this.clearCavans()
         this.drawCirBg()
-        this.drawText(msg, 40, 0, 0)
+        this.drawText(this.tipend, 40, 0, 0)
       }
     },
     mounted () {
-      const self = this
-      let drawing = document.querySelector('#cD')
+      // init
+      let drawing = this.$refs.ctD
       this.ctx = drawing.getContext('2d')
       // 移动原点
       this.ctx.translate(this.r, this.r)
-
-      this.startCd()
+    },
+    destroyed () {
+      this.clearTimer()
     },
     watch: {
-      sec: {
-        immediate: true,
-        handler: function (val) {
-          console.log('watch imd')
-          this.ms = 1000 * val
-        }
+      fire () {
+        this.startCd()
       }
     }
   }
+
+  // canvas标签内的width和height属性是相对尺寸，用于内部计算使用。
+  // 使用css样式，可整体调整canvas的物理大小
 </script>
 
 <style scoped>
 
-  .ctD-wrap {
-    
-  }
-
-  #cD {
-
-  }
-
 </style>
-

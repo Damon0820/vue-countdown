@@ -1,9 +1,10 @@
 {
   "name": "vue-countdown",
   "version": "1.0.0",
-  "description": "A Vue.js project",
+  "description": "A Vue.js component (canvas实现类似时钟的倒计时效果)",
   "author": "DamonFeng",
-  "private": true,
+  "private": false,
+  "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
