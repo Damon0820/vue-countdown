@@ -12,12 +12,15 @@ a cool &amp;&amp; nice  countdown timer component (canvas used) for vue2.x
 
 ### npm
 ```
-尽请期待：目前可直接下载源码目录下src/components/countDown.vue组件直接引用）
+npm install vue-canvas-countdown --save-dev
 ````
 
 ### import
 ````
-尽请期待：目前可直接下载源码目录下src/components/countDown.vue组件直接引用）
+#### es6
+import countDown from 'vue-canvas-countdown'
+#### commonjs
+const countDown = require('vue-canvas-countdown')
 ````
 
 ### Usage
@@ -28,12 +31,9 @@ a cool &amp;&amp; nice  countdown timer component (canvas used) for vue2.x
     <div class="demo">
       <countDown 
         :fire="fire"
-        :time="time"
-        :width="width"
-        :height="height"
+        time="15"
         :tiping="tiping"
         :tipend="tipend"
-        :bgCir="bgCir"
         @onEnd="onEnd"/>
      </div>
   </div>
@@ -51,46 +51,34 @@ export default {
   data () {
     return {
       fire: 0,
-      time: 16,
-      width: 200,
-      height: 200,
       tiping: {
-        text: '倒计时啊',
+        text: '倒计时进行中',
         color: '#fff'
       },
       tipend: {
-        text: '结束了',
+        text: '倒计时结束',
         color: '#fff'
-      },
-      bgCir: 'rgba(0, 0, 0, .6)'
+      }
     }
   },
   methods: {
     fireCD () {
-      // 自定义参数设置
-      this.time = 33
-      this.width = 300
-      this.height = 300
-      this.tiping = 'gogogo'
-      this.bgCir = 'rgba(255, 255, 111, .6)'
+      // 配置参数（更多配置如下表）
       this.tiping = {
-        text: '倒计了啊',
-        color: '#3f3'
+        text: '请下注',
+        color: '#fff'
       }
       this.tipend = {
-        text: 'over',
-        color: '#f33'
+        text: '停止下注',
+        color: '#fff'
       }
-      // 启动倒计时
-      this.fire++
+
+      // 启动倒计时(效果如上图所示)      
+      this.fire++ 
     },
     onEnd () {
       console.log('倒计时结束的回调函数')
     }
-  },
-  mounted () {
-    // 启动倒计时
-    this.fire++    
   }
 }
 </script>

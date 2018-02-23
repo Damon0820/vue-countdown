@@ -17,7 +17,7 @@
 
 <script>
 
-import countDown from './components/countDown'
+import countDown from 'vue-canvas-countdown'
 
 export default {
   name: 'App',
@@ -31,11 +31,11 @@ export default {
       width: 200,
       height: 200,
       tiping: {
-        text: '倒计时',
+        text: '请下注',
         color: '#fff'
       },
       tipend: {
-        text: 'END',
+        text: '停止下注',
         color: '#fff'
       },
       bgCir: 'rgba(0, 0, 0, .6)',

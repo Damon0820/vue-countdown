@@ -1,8 +1,8 @@
 {
-  "name": "vue-countdown",
+  "name": "vue-canvas-countdown",
   "version": "1.0.0",
   "description": "A Vue.js component (canvas实现类似时钟的倒计时效果)",
-  "author": "DamonFeng",
+  "author": "Damon",
   "private": false,
   "main": "index.js",
   "scripts": {
@@ -14,7 +14,8 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "vue": "^2.5.2"
+    "vue": "^2.5.2",
+    "vue-canvas-countdown": "^1.0.0"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
