@@ -5,6 +5,8 @@ a cool &amp;&amp; nice  countdown timer component (canvas used) for vue2.x
 
 ## show result 效果展示
 
+#### 效果图gif展示
+  说明：此图看去效果很差，但是实际在浏览器上效果是很清晰和连贯的。因为转成gif图的时候，质量受损，帧数减少，所以倒计时转到红色时候看起来变的很模糊。
 ![Damon风](https://github.com/Damon0820/vue-countdown/blob/master/static/img/show1.gif "Damon风")
 #### 过程的高清图片展示
 ![Damon风](https://github.com/Damon0820/vue-countdown/blob/master/static/img/countdown-1.png "Damon风") ![Damon风](https://github.com/Damon0820/vue-countdown/blob/master/static/img/countdown-2.png "Damon风") ![Damon风](https://github.com/Damon0820/vue-countdown/blob/master/static/img/countdown-3.png "Damon风")
