@@ -1,34 +1,45 @@
 # vue-countdown
 a cool &amp;&amp; nice  countdown timer component (canvas used) for vue2.x
 
-> canvas实现类似时钟倒计时效果的vue插件。移动端友好。
+> vue + canvas实现炫酷时钟倒计时效果的vue插件。移动端友好。
 
 ## show result 效果展示
 
 #### 效果图gif展示
-  说明：此gif图看去效果很差，但是实际在浏览器上效果是很清晰和连贯的。因为转成gif图的时候，质量受损，帧数减少，所以倒计时转到红色时候看起来变的很模糊。gif图主要用以展示整个动画的过程和效果
+  说明：此gif清晰度很低，因为转成gif图的时候，质量受损，帧数减少，所以倒计时转到红色时候看起来变的很模糊。但是实际在浏览器上效果全程都是很清晰和连贯的
+
 ![Damon风](https://github.com/Damon0820/vue-countdown/blob/master/static/img/show1.gif "Damon风")
 #### 运动过程的高清截图展示
   说明：由于git图清晰度低，辅助用以下几张高清截图展示效果
+
 <br/>![Damon风](https://github.com/Damon0820/vue-countdown/blob/master/static/img/countdown-1.png "Damon风") ![Damon风](https://github.com/Damon0820/vue-countdown/blob/master/static/img/countdown-2.png "Damon风") ![Damon风](https://github.com/Damon0820/vue-countdown/blob/master/static/img/countdown-3.png "Damon风")
 </br>[Damon风的blog地址](https://www.cnblogs.com/damonFeng/)
 
+#### 动画步骤分析：假如设定倒计时总时间为15s， 变黄色时机为10s，变红色时机为5s。
+　　1、开始倒计时后颜色为绿色。绿色含义是：倒计时的时间离结束时间还很长。
+　　2、10s后变黄色。黄色的含义是：倒计时的时间离结束时间挺近了，起警告作用。动画中，出现快速旋转的扇形。
+　　3、5s后变红色。红色的含义是：倒计时的时间马上就要结束了，起强烈警告作用。动画中，快速旋转的扇形速度加快。
+　　4、0s倒计时结束。动画消失。静态圆形框中显示提示文字。
+
 ## Installation
 
-### npm
+### npm 下载
 ```
 npm install vue-canvas-countdown --save-dev
 ````
 
-### import
-````
+### import 引入
+
 #### es6
+````
 import countDown from 'vue-canvas-countdown'
+····
 #### commonjs
+····
 const countDown = require('vue-canvas-countdown')
 ````
 
-### Usage
+### Usage 使用方法
 
 ``` html
 <template>
