@@ -39,7 +39,7 @@ export default {
         color: '#fff'
       },
       bgCir: 'rgba(0, 0, 0, .6)',
-      statusChange: [12000, 5000]
+      statusChange: [12000, 5000],
     }
   },
   methods: {
