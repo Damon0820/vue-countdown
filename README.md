@@ -100,16 +100,17 @@ export default {
 </script>
 ```
 
-### Props 参数
-        属性           可选  类型     单位    默认值                   备注
 
-      * fire:         必选  [Number]        default: 200                      在父组件this.fire++ 即可启动倒计时
-      * width,height: 可选  [Number]  px    default: 200 200                  设置宽高
-      * bgCir:        可选  [String]        rgba(0, 0, 0, .6)                 倒计时圆盘背景颜色
-      * time:         可选  [Number] 秒/s   default: 15                       倒计时所用
-      * statusChange: 可选  [Array] 毫秒/ms [10000, 500]                       倒计时状态改变的时机/时间点（绿=>黄=>红）
-      * tiping:       可选  [Object]        {text: '倒计时', color: '#fff'}    倒计时进行时的静态文本内容和颜色(注意：color和text都得设置)
-      * tipend:       可选  [Object]        {text: 'END', color: '#fff'}       倒计时结束时的静态文本内容和颜色(注意：color和text都得设置)
+### Props 参数
+属性 | 可选 | 类型 | 单位 | 默认值 | 备注
+--- | :--: | :--: | :--: | :--: | :--:
+* fire: |         必选 |  [Number]  | -  |     200   |                   在父组件this.fire++ 即可启动倒计时
+width,height: | 可选 | [Number] | px  |   200 200 |                 设置宽高
+bgCir:  |      可选 | [String] |  - |    rgba(0, 0, 0, .6)  |               倒计时圆盘背景颜色
+time:   |     可选 | [Number] | 秒/s  |  15         |              倒计时所用
+statusChange: | 可选 | [Array] | 毫秒/ms | [10000, 500]       |                倒计时状态改变的时机/时间点（绿=>黄=>红）
+tiping:    |   可选 | [Object]  |  -  |  {text: '倒计时', color: '#fff'} |    倒计时进行时的静态文本内容和颜色(注意：color和text都得设置)
+tipend:     |  可选 | [Object]   |  - |   {text: 'END', color: '#fff'}     |  倒计时结束时的静态文本内容和颜色(注意：color和text都得设置)
 
 ### Describe 说明 
-  welcome your issue  and commit
+  welcome your issue  and PR
