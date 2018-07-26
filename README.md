@@ -104,8 +104,7 @@ export default {
 ### Props 参数
 属性 | 可选 | 类型 | 单位 | 默认值 | 备注
 --- | :--: | :--: | :--: | :--: | :--:
-属性 | 可选 | 类型 | 单位 | 默认值 | 备注
-* fire: |         必选 |  [Number]  | -  |     200   |                   在父组件this.fire++ 即可启动倒计时
+fire: |         必选 |  [Number]  | -  |     200   |                   在父组件this.fire++ 即可启动倒计时
 width,height: | 可选 | [Number] | px  |   200 200 |                 设置宽高
 bgCir:  |      可选 | [String] |  - |    rgba(0, 0, 0, .6)  |               倒计时圆盘背景颜色
 time:   |     可选 | [Number] | 秒/s  |  15         |              倒计时所用
