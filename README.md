@@ -1,4 +1,4 @@
-# vue-countdown
+# vue-countdown ![downloads](https://img.shields.io/badge/downloads-8k-brightgreen.svg) ![downloads](https://img.shields.io/badge/license-MIT-brightgreen.svg)
 a cool &amp;&amp; nice  countdown timer component (canvas used) for vue2.x
 
 > vue + canvas实现炫酷时钟倒计时效果的vue插件。移动端友好。
