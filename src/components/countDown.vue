@@ -91,7 +91,8 @@
         lineWidth,  
         degFan,
         color,
-        degFanStep
+        degFanStep,
+        currentStatus: 0, // 倒计时状态：0未启动， 1开始倒计时， 2倒计时第一次加快， 3倒计时第二次加快
       }
     },
     computed: {
@@ -157,21 +158,32 @@
       },
       colorChange () {
         switch (true) {
+          // 倒计时开始阶段
           case this.timeLeft >= this.statusChange[0] :
             this.color[0] = 'rgba(0, 255, 0, .6)'
             this.color[1] = 'rgba(0, 100, 0, .6)'
             break
+          // 倒计时速度第一次加快
           case this.timeLeft >= this.statusChange[1] :
             this.color[0] = 'rgba(255, 255, 0, .6)'
             this.color[1] = 'rgba(100, 100, 0, .6)'
             // 运动扇形的速度增量
             this.speedFan += degFanStep[0] * fps / 60
+            if (this.currentStatus === 1) {
+              // 初次到达statusChange[0]ms -statusChange[1]ms的时间区间，，改变currentStatus为2。保证只进入if判断一次
+              this.currentStatus = 2
+            }
             break
+          // 倒计时速度第二次加快
           case this.timeLeft <= this.statusChange[1] :
             this.color[0] = 'rgba(255, 0, 0, .6)'
             this.color[1] = 'rgba(100, 0, 0, .6)'
             // 运动扇形的速度增量            
             this.speedFan += degFanStep[1] * fps / 60
+            // 初次到达statusChange[0]ms - 0ms的时间区间，改变currentStatus为3。保证只进入if判断一次
+            if (this.currentStatus === 2) {
+              this.currentStatus = 3
+            }
             break
         }
       },
@@ -193,6 +205,7 @@
           // 倒计时结束,转了一圈后
           this.staticTip()
           this.$emit('onEnd')
+          this.currentStatus = 0
         } else {
           // 倒计时正在进行,转了一圈之内
           this.ctx.lineWidth = this.lineWidth
@@ -225,6 +238,7 @@
         this.clearCavans()
         this.clearTimer()
         let sepTime = 1000 / fps
+        this.currentStatus = 1
         this.timer = setInterval(() => {
           this.drawCd()
           this.timeLeft -= sepTime
@@ -251,7 +265,13 @@
     watch: {
       fire () {
         this.startCd()
-      }
+      },
+      /**
+       * 所有状态改变，emit通知父组件
+       */
+      currentStatus (val) {
+        this.$emit('onStatusChange', val)
+      },
     }
   }
 

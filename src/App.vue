@@ -1,7 +1,8 @@
 <template>
-  <div id="app" @click="fireCD">
+  <div id="app">
     <div class="demo">
-      <countDown 
+      <countDown
+        ref="countDown"
         :fire="fire"
         :time="time"
         :width="width"
@@ -10,14 +11,17 @@
         :tipend="tipend"
         :bgCir="bgCir"
         :statusChange="statusChange"
+        @onStatusChange="onStatusChange"
         @onEnd="onEnd"/>
-     </div>
+      <button @click="fireCD">配置参数开启新的倒计时</button>
+    </div>
   </div>
 </template>
 
 <script>
 
-import countDown from 'vue-canvas-countdown'
+// import countDown from 'vue-canvas-countdown'
+import countDown from './components/countDown'
 
 export default {
   name: 'App',
@@ -27,7 +31,7 @@ export default {
   data () {
     return {
       fire: 0,
-      time: 20,
+      time: 15,
       width: 200,
       height: 200,
       tiping: {
@@ -46,7 +50,7 @@ export default {
     // 重新开启新的倒计时
     fireCD () {
       // 自定义参数设置
-      this.time = 11
+      this.time = 30
       this.width = 300
       this.height = 300
       this.tiping = 'gogogo'
@@ -62,13 +66,17 @@ export default {
       // 启动倒计时
       this.fire++
     },
+    onStatusChange (payload) {
+      console.log('倒计时状态改变：', payload)
+    },
     onEnd () {
-      console.log('倒计时结束的回调函数')
+      console.log('倒计时结束了')
     }
   },
   mounted () {
     // 启动倒计时
-    this.fire++    
+    // 也支持：this.$refs.countDown.startCd()方式 启动倒计时
+    this.fire++ 
   }
 }
 </script>
@@ -80,6 +88,9 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  margin-top: 60px;
+}
+button {
   margin-top: 60px;
 }
 </style>
