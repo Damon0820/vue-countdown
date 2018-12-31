@@ -13,8 +13,8 @@ a cool &amp;&amp; nice  countdown timer component (canvas used) for vue2.x
   说明：由于git图清晰度低，辅助用以下几张高清截图展示效果
 
 <!-- <br/>![Damon风](https://github.com/Damon0820/vue-countdown/blob/master/static/img/countdown-1.png "Damon风") ![Damon风](https://github.com/Damon0820/vue-countdown/blob/master/static/img/countdown-2.png "Damon风") ![Damon风](https://github.com/Damon0820/vue-countdown/blob/master/static/img/countdown-3.png "Damon风")  -->
-<div align="center">
-  <img src="https://github.com/Damon0820/vue-countdown/blob/master/static/img/countdown-1.png" align=center/> <img src="https://github.com/Damon0820/vue-countdown/blob/master/static/img/countdown-2.png" align=center/> <img src="https://github.com/Damon0820/vue-countdown/blob/master/static/img/countdown-3.png" align=center/> <img  src="https://github.com/Damon0820/vue-countdown/blob/master/static/img/countdown-4.png" width="140" hegiht="140" align="center" />
+<div style="diplay: flex;align-items: center;">
+  <img src="https://github.com/Damon0820/vue-countdown/blob/master/static/img/countdown-1.png" align=center/> <img src="https://github.com/Damon0820/vue-countdown/blob/master/static/img/countdown-2.png" align=center/> <img src="https://github.com/Damon0820/vue-countdown/blob/master/static/img/countdown-3.png" align=center/> <img  src="https://github.com/Damon0820/vue-countdown/blob/master/static/img/countdown-4.png" width="140" hegiht="140"/>
 </div>
 </br>[Damon风的blog地址](https://www.cnblogs.com/damonFeng/)
 
