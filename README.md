@@ -10,7 +10,7 @@ a cool &amp;&amp; nice  countdown timer component (canvas used) for vue2.x
 
 ![Damon风](https://github.com/Damon0820/vue-countdown/blob/master/static/img/show1.gif "Damon风")
 #### 运动过程的高清截图展示
-  说明：由于git图清晰度低，辅助用以下几张高清截图展示效果
+  说明：由于gif图清晰度低，辅助用以下几张高清截图展示效果
 
 <!-- <br/>![Damon风](https://github.com/Damon0820/vue-countdown/blob/master/static/img/countdown-1.png "Damon风") ![Damon风](https://github.com/Damon0820/vue-countdown/blob/master/static/img/countdown-2.png "Damon风") ![Damon风](https://github.com/Damon0820/vue-countdown/blob/master/static/img/countdown-3.png "Damon风")  -->
 <div style="diplay: flex;align-items: center;">
