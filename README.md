@@ -6,11 +6,11 @@ a cool &amp;&amp; nice  countdown timer component (canvas used) for vue2.x
 ## show result 效果展示
 
 #### 效果图gif展示
-  说明：此gif清晰度很低，因为转成gif图的时候，质量受损，帧数减少，所以倒计时转到红色时候看起来变的很模糊。但是实际在浏览器上效果全程都是很清晰和连贯的
+  <!-- 说明：此gif清晰度很低，因为转成gif图的时候，质量受损，帧数减少，所以倒计时转到红色时候看起来变的很模糊。但是实际在浏览器上效果全程都是很清晰和连贯的 -->
 
 ![Damon风](https://github.com/Damon0820/vue-countdown/blob/master/static/img/show1.gif "Damon风")
-#### 运动过程的高清截图展示
-  说明：由于gif图清晰度低，辅助用以下几张高清截图展示效果
+#### 运动过程的几个状态截图展示
+  <!-- 说明：由于gif图清晰度低，辅助用以下几张高清截图展示效果 -->
 
 <!-- <br/>![Damon风](https://github.com/Damon0820/vue-countdown/blob/master/static/img/countdown-1.png "Damon风") ![Damon风](https://github.com/Damon0820/vue-countdown/blob/master/static/img/countdown-2.png "Damon风") ![Damon风](https://github.com/Damon0820/vue-countdown/blob/master/static/img/countdown-3.png "Damon风")  -->
 <div style="diplay: flex;align-items: center;">
@@ -104,7 +104,11 @@ export default {
     onEnd () {
       console.log('倒计时结束的回调函数')
     }
-  }
+	},
+	mounted () {
+		// 启动倒计时
+		this.fireCD()
+	}
 }
 </script>
 ```
@@ -128,4 +132,6 @@ onStatusChange: |  倒计时状态的变化：从开启->第一次加快->第�
 onEnd: |  倒计时结束    | 等价于 onStatusChange事件0的状态
 
 ### Describe 说明 
-  welcome your issue  and PR
+  + welcome your issue  and PR
+	+ 也欢迎你fork源码，改造成你想要的模样。倒计时组件的路径在源码中的是`vue-countdown/src/components/countDown.vue`。
+	+ 如果对你有帮助，给个小星星~~
