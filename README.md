@@ -132,6 +132,6 @@ onStatusChange: |  倒计时状态的变化：从开启->第一次加快->第�
 onEnd: |  倒计时结束    | 等价于 onStatusChange事件0的状态
 
 ### Describe 说明 
-  +  welcome your issue  and PR
+  + welcome your issue  and PR
 	+ 也欢迎fork源码，改造成你想要的模样。在源码中倒计时组件的路径是: `vue-countdown/src/components/countDown.vue`。
 	+ 如果有帮助，小星星走起~~
