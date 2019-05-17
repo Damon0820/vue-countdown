@@ -105,10 +105,10 @@ export default {
       console.log('倒计时结束的回调函数')
     }
 	},
-	mounted () {
-		// 启动倒计时
-		this.fireCD()
-	}
+  mounted () {
+    // 启动倒计时
+    this.fireCD()
+  }
 }
 </script>
 ```
